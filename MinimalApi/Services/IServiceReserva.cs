@@ -8,6 +8,8 @@ namespace MinimalApi.Services
         Task AddReservaAsync(Reserva reserva);
         Task UpdateReservaAsync(Reserva reserva);
         Task DeleteReservaAsync(int id);
+        Task CheckInAsync(int id);
+        Task<string> GerarBilheteEletronicoAsync(int id);
     }
 
 }

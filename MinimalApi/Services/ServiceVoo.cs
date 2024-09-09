@@ -1,42 +1,40 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MinimalApi.Data;
-using MinimalApi.Model;
+﻿using MinimalApi.Model;
+using MinimalApi.Repositories;
 
 namespace MinimalApi.Services
 {
     public class ServiceVoo : IServiceVoo
     {
-        private readonly IServiceVoo _RepositorioVoo;
+        private readonly IRepositorioVoo _repositorioVoo;
 
-        public ServiceVoo(IServiceVoo RepositorioVoo)
+        public ServiceVoo(IRepositorioVoo repositorioVoo)
         {
-            _RepositorioVoo = RepositorioVoo;
+            _repositorioVoo = repositorioVoo;
         }
 
-        public async Task<IEnumerable<Voo>> GetVoosAsync(string origin, string destination, DateTime departureDate, DateTime? returnDate)
+        public async Task<IEnumerable<Voo>> GetVoosAsync(string origem, string destino, DateTime dataEmbarque, DateTime? dataRetorno)
         {
-            return await _RepositorioVoo.GetVoosAsync(origin, destination, departureDate, returnDate);
+            return await _repositorioVoo.GetVoosAsync(origem, destino, dataEmbarque, dataRetorno);
         }
 
         public async Task<Voo> GetVooByIdAsync(int id)
         {
-            return await _RepositorioVoo.GetVooByIdAsync(id);
+            return await _repositorioVoo.GetVooByIdAsync(id);
         }
 
         public async Task AddVooAsync(Voo voo)
         {
-            await _RepositorioVoo.AddVooAsync(voo);
+            await _repositorioVoo.AddVooAsync(voo);
         }
 
         public async Task UpdateVooAsync(Voo voo)
         {
-            await _RepositorioVoo.UpdateVooAsync(voo);
+            await _repositorioVoo.UpdateVooAsync(voo);
         }
 
         public async Task DeleteVooAsync(int id)
         {
-            await _RepositorioVoo.DeleteVooAsync(id);
+            await _repositorioVoo.DeleteVooAsync(id);
         }
     }
-
 }

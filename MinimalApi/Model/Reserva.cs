@@ -9,5 +9,7 @@
         public int NumAssento { get; set; }
         public Passageiro Passageiros { get; set; }
         public Voo Voo { get; set; }
+        public bool CheckedIn { get; set; }
+        public string? BilheteEletronico { get; set; }
     }
 }

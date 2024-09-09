@@ -2,9 +2,9 @@
 
 namespace MinimalApi.Repositories
 {
-    public interface IRepositorioVoo    
+    public interface IRepositorioVoo
     {
-        Task<IEnumerable<Voo>> GetVoosAsync(string Origem, string Destino, DateTime DataEmbarque, DateTime? DataRetorno);
+        Task<IEnumerable<Voo>> GetVoosAsync(string origem, string destino, DateTime dataEmbarque, DateTime? dataRetorno);
         Task<Voo> GetVooByIdAsync(int id);
         Task AddVooAsync(Voo voo);
         Task UpdateVooAsync(Voo voo);
