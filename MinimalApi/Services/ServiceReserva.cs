@@ -6,6 +6,7 @@ namespace MinimalApi.Services
     public class ServiceReserva : IServiceReserva
     {
         private readonly IRepositorioReserva _RepositorioReserva;
+        private readonly IRepositorioVoo _RepositorioVoo;
 
         public ServiceReserva(IRepositorioReserva ReservaRepository)
         {
