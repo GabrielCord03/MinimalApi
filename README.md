@@ -46,4 +46,5 @@ A API permite a realização de operações de CRUD para voos, passageiros e res
 ### Documentação
 - Acesse o link para ver a documentação da API através do swagger: https://localhost:{PORT}/swagger/index.html.
 
-
+### Autores
+- Gabriel Cordeiro Alves, Diógenes Junior Lópes Dias De Souza, Caio Ramalho de Vasconcelos, Samuel Favero de Jesus, Gabriel de Jesus Souza Cesário , Eduardo Miranda de Freitas
