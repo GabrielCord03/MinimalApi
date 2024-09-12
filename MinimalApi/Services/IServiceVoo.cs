@@ -9,5 +9,7 @@ namespace MinimalApi.Services
         Task AddVooAsync(Voo voo);
         Task UpdateVooAsync(Voo voo);
         Task DeleteVooAsync(int id);
+
+        Task<IEnumerable<RelatorioOcupacao>> GetRelatorioOcupacaoSemanalAsync();
     }
 }

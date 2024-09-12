@@ -9,5 +9,6 @@ namespace MinimalApi.Repositories
         Task AddVooAsync(Voo voo);
         Task UpdateVooAsync(Voo voo);
         Task DeleteVooAsync(int id);
+        Task<IEnumerable<Voo>> GetVoosUltimaSemanaAsync();
     }
 }

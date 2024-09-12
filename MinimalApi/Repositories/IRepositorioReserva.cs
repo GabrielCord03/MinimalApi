@@ -8,5 +8,7 @@ namespace MinimalApi.Repositories
         Task AddReservaAsync(Reserva reservas);
         Task UpdateReservaAsync(Reserva reservas);
         Task DeleteReservaAsync(int id);
+        Task<IEnumerable<Reserva>> GetVendasUltimoMesAsync();
+        Task<IEnumerable<Reserva>> GetVendasMesAnteriorAsync();
     }
 }

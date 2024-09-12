@@ -10,6 +10,7 @@ namespace MinimalApi.Services
         Task DeleteReservaAsync(int id);
         Task CheckInAsync(int id);
         Task<string> GerarBilheteEletronicoAsync(int id);
+        Task<IEnumerable<RelatorioVendas>> GetRelatorioVendasMensalAsync();
     }
 
 }

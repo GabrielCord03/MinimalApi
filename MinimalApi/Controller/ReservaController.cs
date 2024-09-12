@@ -28,18 +28,18 @@ namespace MinimalApi.Controller
                 return BadRequest("No available seats.");
             }
 
-            // Reduz o número de assentos disponíveis
+            
             voo.AssentosDisponiveis--;
             await _serviceVoo.UpdateVooAsync(voo);
 
-            // Verifica e adiciona o passageiro se necessário
+            
             var passageiro = await _servicePassageiro.GetPassageiroByCpfAsync(reserva.Passageiros.CPF);
             if (passageiro == null)
             {
                 await _servicePassageiro.AddPassageiroAsync(reserva.Passageiros);
             }
 
-            // Adiciona a reserva
+            
             await _serviceReserva.AddReservaAsync(reserva);
 
             return CreatedAtAction(nameof(GetReservaById), new { id = reserva.Id }, reserva);
@@ -90,6 +90,13 @@ namespace MinimalApi.Controller
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("relatorio-vendas-mensal")]
+        public async Task<ActionResult<IEnumerable<RelatorioVendas>>> GetRelatorioVendasMensal()
+        {
+            var relatorio = await _serviceReserva.GetRelatorioVendasMensalAsync();
+            return Ok(relatorio);
         }
     }
 }

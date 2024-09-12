@@ -40,7 +40,7 @@ namespace MinimalApi.Services
                 throw new InvalidOperationException("Reserva não encontrada ou já realizada.");
             }
 
-            // Verifique se o voo permite check-in
+            
             var voo = await _RepositorioVoo.GetVooByIdAsync(reserva.IdVoo);
             if (voo == null || voo.DataEmbarque > DateTime.UtcNow.AddHours(1))
             {
@@ -57,8 +57,36 @@ namespace MinimalApi.Services
 
         public async Task<string> GerarBilheteEletronicoAsync(int id)
         {
-            // Lógica para gerar bilhete eletrônico
-            return "Bilhete gerado"; // Retornar bilhete em formato de string ou arquivo
+            
+            return "Bilhete gerado"; 
         }
+
+        public async Task<IEnumerable<RelatorioVendas>> GetRelatorioVendasMensalAsync()
+        {
+            // Obter vendas do mês atual e do mês anterior
+            var vendasDoMes = await _RepositorioReserva.GetVendasUltimoMesAsync();
+            var vendasMesAnterior = await _RepositorioReserva.GetVendasMesAnteriorAsync();
+
+            // Criar o relatório de vendas
+            var relatorio = vendasDoMes
+                .GroupBy(v => v.IdVoo)
+                .Select(g => new RelatorioVendas
+                {
+                    VooId = g.Key,
+                    TotalArrecadado = g.Sum(v => v.Voo.Preco),  // Total arrecadado para o voo
+                    FormaPagamento = g.GroupBy(v => v.FormaPagamento)
+                        .Select(fg => new FormaPagamentoRelatorio
+                        {
+                            Forma = fg.Key,
+                            Total = fg.Sum(v => v.Voo.Preco)  // Total arrecadado por forma de pagamento
+                        }),
+                    ComparacaoComMesAnterior = vendasMesAnterior
+                        .Where(vm => vm.IdVoo == g.Key)
+                        .Sum(vm => vm.Voo.Preco)  // Comparação com o mês anterior
+                });
+
+            return relatorio;
+        }
+
     }
 }

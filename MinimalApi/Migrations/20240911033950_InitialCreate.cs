@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MinimalApi.Migrations
 {
-    /// <inheritdoc />
+   
     public partial class InitialCreate : Migration
     {
-        /// <inheritdoc />
+        
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -91,7 +91,7 @@ namespace MinimalApi.Migrations
                 column: "VooId");
         }
 
-        /// <inheritdoc />
+      
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

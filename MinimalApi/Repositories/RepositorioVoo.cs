@@ -46,5 +46,12 @@ namespace MinimalApi.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<IEnumerable<Voo>> GetVoosUltimaSemanaAsync()
+        {
+            var umaSemanaAtras = DateTime.UtcNow.AddDays(-7);
+            return await _context.Voos
+                .Where(v => v.DataEmbarque >= umaSemanaAtras)
+                .ToListAsync();
+        }
     }
 }

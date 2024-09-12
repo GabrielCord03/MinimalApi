@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MinimalApi.Data;
 using MinimalApi.Model;
+using MinimalApi.Services;  
 
 namespace MinimalApi.Controller
 {
@@ -10,10 +11,13 @@ namespace MinimalApi.Controller
     public class VooController : ControllerBase
     {
         private readonly AirlineDbContext _context;
+        private readonly IServiceVoo _serviceVoo;  
 
-        public VooController(AirlineDbContext context)
+       
+        public VooController(AirlineDbContext context, IServiceVoo serviceVoo)
         {
             _context = context;
+            _serviceVoo = serviceVoo;  
         }
 
         [HttpGet]
@@ -24,6 +28,13 @@ namespace MinimalApi.Controller
                 .ToListAsync();
 
             return Ok(voos);
+        }
+
+        [HttpGet("relatorio-ocupacao-semanal")]
+        public async Task<ActionResult<IEnumerable<RelatorioOcupacao>>> GetRelatorioOcupacaoSemanal()
+        {
+            var relatorio = await _serviceVoo.GetRelatorioOcupacaoSemanalAsync();
+            return Ok(relatorio);
         }
     }
 }

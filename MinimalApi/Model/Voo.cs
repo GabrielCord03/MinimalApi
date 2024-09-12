@@ -10,5 +10,6 @@
         public string Airline { get; set; }
         public decimal Preco { get; set; }
         public int AssentosDisponiveis { get; set; }
+        public int AssentosTotais { get; set; }
     }
 }

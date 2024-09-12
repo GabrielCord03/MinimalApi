@@ -11,5 +11,7 @@
         public Voo Voo { get; set; }
         public bool CheckedIn { get; set; }
         public string? BilheteEletronico { get; set; }
+        public decimal Preco { get; set; }
+        public string FormaPagamento { get; set; }
     }
 }

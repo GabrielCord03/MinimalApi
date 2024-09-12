@@ -39,6 +39,23 @@ namespace MinimalApi.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<IEnumerable<Reserva>> GetVendasUltimoMesAsync()
+        {
+            var ultimoMes = DateTime.UtcNow.AddMonths(-1);
+            return await _context.Reservas
+                .Where(r => r.DataReserva >= ultimoMes)  // Supondo que 'DataReserva' seja o campo de data da reserva
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<Reserva>> GetVendasMesAnteriorAsync()
+        {
+            var mesAtual = DateTime.UtcNow;
+            var primeiroDiaMesAnterior = new DateTime(mesAtual.Year, mesAtual.Month, 1).AddMonths(-1);
+            var ultimoDiaMesAnterior = new DateTime(mesAtual.Year, mesAtual.Month, 1).AddDays(-1);
+
+            return await _context.Reservas
+                .Where(r => r.DataReserva >= primeiroDiaMesAnterior && r.DataReserva <= ultimoDiaMesAnterior)
+                .ToListAsync();
+        }
     }
 
 }

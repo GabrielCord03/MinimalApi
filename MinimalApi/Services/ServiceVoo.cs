@@ -36,5 +36,19 @@ namespace MinimalApi.Services
         {
             await _repositorioVoo.DeleteVooAsync(id);
         }
+
+        public async Task<IEnumerable<RelatorioOcupacao>> GetRelatorioOcupacaoSemanalAsync()
+        {
+            var voos = await _repositorioVoo.GetVoosUltimaSemanaAsync();
+            return voos.Select(v => new RelatorioOcupacao
+            {
+                VooId = v.Id,
+                Origem = v.Origem,
+                Destino = v.Destino,
+                DataEmbarque = v.DataEmbarque,
+                PercentualOcupacao = ((v.AssentosTotais - v.AssentosDisponiveis) / (double)v.AssentosTotais) * 100
+            });
+        }
+
     }
 }
